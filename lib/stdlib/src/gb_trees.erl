@@ -410,10 +410,10 @@ delete(Key, {S, T}) when is_integer(S), S >= 0 ->
 
 %% See `lookup' for notes on the term comparison order.
 
-delete_1(Key, {Key1, Value, Smaller, Larger}) when Key < Key1 ->
+delete_1(Key, {Key1, Value, Smaller, Bigger}) when Key < Key1 ->
     case delete_1(Key, Smaller) of
         not_found      -> not_found;
-        {ok, Smaller1} -> {ok, {Key1, Value, Smaller1, Larger}}
+        {ok, Smaller1} -> {ok, {Key1, Value, Smaller1, Bigger}}
     end;
 delete_1(Key, {Key1, Value, Smaller, Bigger}) when Key > Key1 ->
     case delete_1(Key, Bigger) of

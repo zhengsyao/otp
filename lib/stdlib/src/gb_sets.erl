@@ -410,10 +410,10 @@ delete(Key, {S, T}) ->
     {ok, T1} = delete_1(Key, T),
     {S - 1, T1}.
 
-delete_1(Key, {Key1, Smaller, Larger}) when Key < Key1 ->
+delete_1(Key, {Key1, Smaller, Bigger}) when Key < Key1 ->
     case delete_1(Key, Smaller) of
         not_found      -> not_found;
-        {ok, Smaller1} -> {ok, {Key1, Smaller1, Larger}}
+        {ok, Smaller1} -> {ok, {Key1, Smaller1, Bigger}}
     end;
 delete_1(Key, {Key1, Smaller, Bigger}) when Key > Key1 ->
     case delete_1(Key, Bigger) of
