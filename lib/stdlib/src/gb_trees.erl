@@ -413,15 +413,17 @@ delete(Key, {S, T}) when is_integer(S), S >= 0 ->
 delete_1(Key, {Key1, Value, Smaller, Larger}) when Key < Key1 ->
     case delete_1(Key, Smaller) of
         not_found      -> not_found;
-        {ok, Smaller1} -> {ok, {Key1, Smaller1, Larger}}
+        {ok, Smaller1} -> {ok, {Key1, Value, Smaller1, Larger}}
     end;
 delete_1(Key, {Key1, Value, Smaller, Bigger}) when Key > Key1 ->
     case delete_1(Key, Bigger) of
-        not_found -> not_found;
-        {ok, Bigger1} -> {ok, {Key1, Smaller, Bigger1}}
-    end
+        not_found     -> not_found;
+        {ok, Bigger1} -> {ok, {Key1, Value, Smaller, Bigger1}}
+    end;
 delete_1(_, {_, _, Smaller, Larger}) ->
-    merge(Smaller, Larger).
+    {ok, merge(Smaller, Larger)};
+delete_1(_, nil) ->
+    not_found.
 
 merge(Smaller, nil) ->
     Smaller;

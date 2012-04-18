@@ -165,7 +165,7 @@
 -export([new/0, is_element/2, add_element/2, del_element/2,
 	 subtract/2]).
 
-%% GB-trees adapted from Sven-Olof Nyström's implementation for
+%% GB-trees adapted from Sven-Olof NystrÃ¶m's implementation for
 %% representation of sets.
 %%
 %% Data structures:
@@ -407,7 +407,7 @@ delete_any(Key, {S, T}) ->
       Set2 :: gb_set().
 
 delete(Key, {S, T}) ->
-    {ok, T1} = delete_1(Key, T);
+    {ok, T1} = delete_1(Key, T),
     {S - 1, T1}.
 
 delete_1(Key, {Key1, Smaller, Larger}) when Key < Key1 ->
