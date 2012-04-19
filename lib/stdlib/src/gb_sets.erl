@@ -418,7 +418,7 @@ delete_1(Key, {Key1, Smaller, Bigger}) when Key < Key1 ->
 delete_1(Key, {Key1, Smaller, Bigger}) when Key > Key1 ->
     case delete_1(Key, Bigger) of
         not_found     -> not_found;
-        {ok, Bigger1} -> {Key1, Smaller, Bigger1}
+        {ok, Bigger1} -> {ok, {Key1, Smaller, Bigger1}}
     end;
 delete_1(_, {_, Smaller, Larger}) ->
     {ok, merge(Smaller, Larger)};
